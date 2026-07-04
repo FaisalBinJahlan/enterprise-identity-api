@@ -1,0 +1,16 @@
+# Environments
+venv/
+.env
+
+# Security Keys & Certificates
+*.pem
+private.pem
+public.pem
+
+# Logs
+*.log
+app.log
+
+# Python Cache
+__pycache__/
+*.pyc
