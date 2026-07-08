@@ -22,4 +22,5 @@ class Settings:
 # Instantiate the settings object to be imported across the application
 settings = Settings()
 
+
 logger.info(f"{settings.PROJECT_NAME} configurations loaded successfully.")
