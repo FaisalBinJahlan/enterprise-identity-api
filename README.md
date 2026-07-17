@@ -245,7 +245,6 @@ Expected result:
 ```
 
 ---
-
 ## Continuous Integration
 
 This project includes a basic GitHub Actions CI workflow.
@@ -261,12 +260,14 @@ Workflow file:
 
 ```txt
 .github/workflows/ci.yml
-````md
+```
+
 CI command:
 
 ```powershell
 pytest -v
 ```
+
 ---
 
 ## Security Notes
@@ -280,5 +281,3 @@ This project avoids committing sensitive or local runtime files:
 - Python cache files
 
 Secrets must be provided through environment variables.
-
----
