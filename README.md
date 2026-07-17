@@ -1,4 +1,31 @@
-## Phase 1 MLOPS Roadmap Status
+# Enterprise Identity API
+
+A secure FastAPI backend foundation for authentication, authorization, and future AI/MLOps services.
+
+This project implements a production-style backend starter with PostgreSQL, SQLAlchemy, JWT authentication, role-based access control, Docker Compose, logging, environment variables, and automated tests with GitHub Actions CI.
+
+---
+
+## Features
+
+- FastAPI REST API
+- PostgreSQL database
+- SQLAlchemy ORM
+- User registration and login
+- Password hashing with bcrypt
+- JWT access tokens
+- Protected routes
+- Role-based access control: `user` / `admin`
+- Swagger/OpenAPI documentation
+- Environment-based configuration
+- Docker Compose setup
+- Application logging
+- Pytest test suite
+- GitHub Actions basic CI
+
+---
+
+## Phase 1 MLOps Roadmap Status
 
 Completed:
 
@@ -17,32 +44,7 @@ Completed:
 - Docker Compose
 - Pytest tests
 - Git/GitHub cleanup
-
-
-# Enterprise Identity API
-
-A secure FastAPI backend foundation for authentication, authorization, and future AI/MLOps services.
-
-This project implements a production-style backend starter with PostgreSQL, SQLAlchemy, JWT authentication, role-based access control, Docker Compose, logging, environment variables, and automated tests.
-
----
-
-
-## Features
-
-- FastAPI REST API
-- PostgreSQL database
-- SQLAlchemy ORM
-- User registration and login
-- Password hashing with bcrypt
-- JWT access tokens
-- Protected routes
-- Role-based access control: `user` / `admin`
-- Swagger/OpenAPI documentation
-- Environment-based configuration
-- Docker Compose setup
-- Application logging
-- Pytest test suite
+- GitHub Actions basic CI
 
 ---
 
@@ -58,6 +60,7 @@ This project implements a production-style backend starter with PostgreSQL, SQLA
 - Docker
 - Docker Compose
 - pytest
+- GitHub Actions
 
 ---
 
@@ -66,6 +69,7 @@ This project implements a production-style backend starter with PostgreSQL, SQLA
 ```txt
 enterprise-identity-api/
 │
+├── .github/            # GitHub Actions CI workflows
 ├── api/                # API routers: auth, admin, health
 ├── core/               # configuration, database, logging
 ├── models/             # SQLAlchemy database models
@@ -81,7 +85,6 @@ enterprise-identity-api/
 ├── .env.example
 └── main.py
 ```
-
 ---
 
 ## Environment Variables
@@ -241,6 +244,29 @@ Expected result:
 3 passed
 ```
 
+---
+
+## Continuous Integration
+
+This project includes a basic GitHub Actions CI workflow.
+
+On every push or pull request to the `main` branch, GitHub Actions will:
+
+- start a PostgreSQL service
+- install Python dependencies
+- load test environment variables
+- run the pytest suite
+
+Workflow file:
+
+```txt
+.github/workflows/ci.yml
+````md
+CI command:
+
+```powershell
+pytest -v
+```
 ---
 
 ## Security Notes
