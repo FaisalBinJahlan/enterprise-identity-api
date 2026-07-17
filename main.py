@@ -1,37 +1,18 @@
-from security.crypto_manager import CryptoManager
-from security.rsa_manager import RSAManager
-from core.logger import get_logger
-from core.config import settings
+from fastapi import FastAPI
+from api.admin import router as admin_router
+from api.auth import router as auth_router
+from api.health import router as health_router
+from core.database import Base, engine
+from models.user import User
 
-logger = get_logger("MainApp")
+Base.metadata.create_all(bind=engine)
 
-def run_security_test():
-    logger.info("Starting production-grade security engine test...")
-    
-    # 1. Test Configuration Loader
-    print(f"\n--- System Info ---")
-    print(f"App Name: {settings.PROJECT_NAME}")
-    print(f"Loaded Secret Key: {settings.SECRET_KEY}")
-    print(f"-------------------\n")
-    
-    # 2. Test Cryptography (bcrypt)
-    crypto = CryptoManager()
-    test_password = "SuperSecretPassword123!"
-    
-    hashed_pwd = crypto.hash_password(test_password)
-    print(f"Original: {test_password}")
-    print(f"Hashed: {hashed_pwd}\n")
-    
-    print("--- Running Verification Checkpoints ---")
-    crypto.verify_password("SuperSecretPassword123!", hashed_pwd)
-    crypto.verify_password("WrongPassword!", hashed_pwd)
-    
-    # 3. Test RSA Generation
-    print("\n--- Running RSA Key Generation ---")
-    rsa_engine = RSAManager()
-    rsa_engine.generate_key_pair()
-    
-    logger.info("Security engine test pipeline completed.")
+app = FastAPI(
+    title="Enterprise Identity API",
+    description="Secure authentication and authorization API with RBAC.",
+    version="0.1.0",
+)
 
-if __name__ == "__main__":
-    run_security_test()
+app.include_router(health_router)
+app.include_router(auth_router)
+app.include_router(admin_router)

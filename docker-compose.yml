@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: identity_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: identity_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: identity_api
+    environment:
+      PROJECT_NAME: Enterprise Identity API
+      APP_ENV: development
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/identity_db
+      SECRET_KEY: change-this-secret-key-in-production
+      ACCESS_TOKEN_EXPIRE_MINUTES: 15
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
